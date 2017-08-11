@@ -6,7 +6,7 @@ Main view controller for the AR experience.
 */
 
 import ARKit
-import SceneKit
+//import SceneKit
 import UIKit
 import os.log
 
@@ -50,6 +50,8 @@ class ViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var messagePanel: UIView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var messagePanel_SE3: UIView!
+    @IBOutlet weak var messageLabel_SE3: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var addObjectButton: UIButton!
     @IBOutlet weak var restartExperienceButton: UIButton!
@@ -127,6 +129,12 @@ class ViewController: UIViewController {
         messagePanel.clipsToBounds = true
         messagePanel.isHidden = true
         messageLabel.text = ""
+      
+        messagePanel_SE3.layer.cornerRadius = 3.0
+        messagePanel_SE3.clipsToBounds = true
+        messagePanel_SE3.isHidden = false
+        messageLabel_SE3.text = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"
+      
     }
 	
     // MARK: - Gesture Recognizers

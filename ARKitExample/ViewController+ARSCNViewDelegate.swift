@@ -13,18 +13,29 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         let camera = self.session.currentFrame?.camera
+        var outMessage = String()
+      
         if let logger = self.oslog {
           os_log("Renderer: %@", log: logger, type: .info, "NEW FRAME - RENDER START")
           if let translation = camera?.transform.translation.debugDescription{
+            outMessage += "Trans: " + translation + ", "
             os_log("Translation: %@", log: logger, type: .info, translation)
           }
           
           if let eulerAngles = camera?.eulerAngles.debugDescription {
+            outMessage += "(R,P,Y): " + eulerAngles
             os_log("Roll,Pitch,Yaw: %@", log: logger, type: .info, eulerAngles)
           }
           
           os_log("Renderer: %@", log: logger, type: .info, "NEW FRAME - RENDER END")
         }
+      
+      DispatchQueue.main.async {
+        self.messageLabel_SE3.text = outMessage
+      }
+
+
+
       
         updateFocusSquare()
         
@@ -58,7 +69,7 @@ extension ViewController: ARSCNViewDelegate {
             self.removePlane(anchor: planeAnchor)
         }
     }
-    
+  
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         textManager.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
         
