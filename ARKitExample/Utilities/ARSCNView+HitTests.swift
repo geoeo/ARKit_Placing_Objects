@@ -81,10 +81,8 @@ extension ARSCNView {
         
         let points = features.points
         
-        for i in 0...features.count {
-            
-            let feature = points.advanced(by: Int(i))
-            let featurePos = feature.pointee
+        for featurePos in points {
+        
             
             let originToFeature = featurePos - ray.origin
             
@@ -157,9 +155,7 @@ extension ARSCNView {
         var closestFeaturePoint = origin
         var minDistance = Float.greatestFiniteMagnitude
         
-        for i in 0...features.count {
-            let feature = points.advanced(by: Int(i))
-            let featurePos = feature.pointee
+        for featurePos in points {
             
             let originVector = origin - featurePos
             let crossProduct = simd_cross(originVector, direction)

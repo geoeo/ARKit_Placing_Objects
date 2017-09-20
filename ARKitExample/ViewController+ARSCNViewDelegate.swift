@@ -30,13 +30,11 @@ extension ViewController: ARSCNViewDelegate {
           os_log("Renderer: %@", log: logger, type: .info, "NEW FRAME - RENDER END")
         }
       
-      DispatchQueue.main.async {
-        self.messageLabel_SE3.text = outMessage
-      }
+        // Have to update UI in Main Thread
+        DispatchQueue.main.async {
+          self.messageLabel_SE3.text = outMessage
+        }
 
-
-
-      
         updateFocusSquare()
         
         // If light estimation is enabled, update the intensity of the model's lights and the environment map
